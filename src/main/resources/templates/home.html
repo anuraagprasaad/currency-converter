@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Currency Converter</title>
+</head>
+<div th:replace="header :: head"></div>
+<body>
+	<nav th:replace="nav :: main"></nav>
+
+	<div id="main" class="container-fluid">
+
+		<bean id="numberFormat" class="java.text.NumberFormat" />
+
+		<form name="form" th:object="${currency}"
+			th:action="@{/home}" class="form-template form-x-large form-horizontal centered"
+			method="POST">
+
+			<h2 class="form-signin-heading">Currency Converter</h2>
+
+
+			<div th:if="${#fields.hasErrors('global')}"
+				class="alert alert-danger" role="alert">
+				<strong th:each="err : ${#fields.globalErrors()}" th:text="${err}"></strong>
+			</div>
+
+		<div class="row">
+				<div class="form-group col-sm-5"
+					th:classappend="${#fields.hasErrors('*{amount}')}? has-error">
+					<div class="input-group input-group-sm">
+						<label for="amount" class=" control-label">Amount to convert</label> <input
+							type="text" th:field="*{amount}" class="form-control"
+							autofocus="true" /> <span class="help-block"
+							th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></span>
+					</div>
+				</div>
+			</div>	
+
+			<div class="row">
+				<div class="form-group col-sm-5"
+					th:classappend="${#fields.hasErrors('*{fromCurrency}')}? has-error">
+					<div class="input-group input-group-sm">
+						<label for="fromCurrency" class="control-label">From Currency</label> <select
+							th:field="*{fromCurrency}" class="bootstrap-select">
+							<option value="">Select any</option>
+							<option th:each="fromCurrency : ${currencies}" th:value="${fromCurrency}"
+								th:text="${fromCurrency.name}"></option>
+						</select> <span class="help-block" th:if="${#fields.hasErrors('fromCurrency')}"
+							th:errors="*{fromCurrency}"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-5"
+					th:classappend="${#fields.hasErrors('*{toCurrency}')}? has-error">
+					<div class="input-group input-group-sm">
+						<label for="toCurrency" class="control-label">To Currency</label><select
+							th:field="*{toCurrency}" class="bootstrap-select">
+							<option value="">Select any</option>
+							<option th:each="toCurrency : ${currencies}" th:value="${toCurrency}"
+								th:text="${toCurrency.name}"></option>
+						</select> <span class="help-block" th:if="${#fields.hasErrors('toCurrency')}"
+							th:errors="*{toCurrency}"></span>
+					</div>
+				</div>
+			</div>
+			
+			<!--
+			<div class="row">
+				<div class="form-group col-sm-5"
+					th:classappend="${#fields.hasErrors('*{historicalExchangeRateDate}')}? has-error">
+					<div class="input-group input-group-sm">
+						<label for="historicalExchangeRateDate" class="control-label">Historical
+							Date (YYYY-MM-DD)</label> <input type="text" th:field="*{historicalExchangeRateDate}"
+							class="form-control" placeholder="YYYY-MM-DD" />
+							<span
+							class="help-block" th:if="${#fields.hasErrors('historicalExchangeRateDate')}"
+							th:errors="*{historicalExchangeRateDate}"> </span>
+					</div>
+				</div>
+			 </div>-->
+			 
+			 <div class="row">
+				<div class="form-group col-sm-5" th:classappend="${#fields.hasErrors('*{historicalExchangeRateDate}')}? has-error">
+					<div class="input-group input-group-sm">
+						<label for="historicalExchangeRateDate" class="control-label">Historical
+							Date (YYYY-MM-DD)</label> <input type="text" th:field="*{historicalExchangeRateDate}"
+							class="form-control" placeholder="YYYY-MM-DD" />													
+					</div>
+				</div>
+			 </div>
+			 
+			<div class="panel panel-default form-group">
+			<div class="panel-heading">
+				<strong>Conversion history</strong>
+			</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>From Currency</th>
+						<th>To Currency</th>
+						<th>Rate</th>						
+						<th>Amount</th>
+						<th>Total</th>
+						<th>Historical Date</th>
+						<th>Query Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item,i : ${history}" th:class="${i.odd}? 'odd'">
+						<th th:text="${i.count}" scope="row"></th>
+						<td th:text="${item.fromCurrency}"></td>
+						<td th:text="${item.toCurrency}"></td>						
+						<td th:text="${#numbers.formatDecimal(item.rate, 0, 'DEFAULT', 6, 'DEFAULT')}"></td>						
+						<td th:text="${#numbers.formatDecimal(item.amount, 0, 'DEFAULT', 6, 'DEFAULT')}"></td>
+						<td th:text="${#numbers.formatDecimal(item.total, 0, 'DEFAULT', 6, 'DEFAULT')}"></td>
+						<td th:text="${item.historicalExchangeRateDate} ? ${#dates.format(item.historicalExchangeRateDate, 'dd-MMM-yyyy')}"></td>
+						<td th:text="${item.exchangeRateConversionDate} ? ${#dates.format(item.exchangeRateConversionDate, 'dd-MMM-yyyy')}"></td>						
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<div class="text-center"> 
+				<input type="submit" class="btn btn-lg btn-primary" value="Convert"/>
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>
