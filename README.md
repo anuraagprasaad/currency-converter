@@ -5,13 +5,13 @@ This is a demo Currency Converter web application that uses one of the public cu
 
 ##Technologies
 
-#Spring Framework
-#Spring Boot 
-#Spring Data
-#JPA - with Hibernate as persistence provider and MySQL as database.
-#Ehcache 
-#Thymeleaf - pretty cool view technology which nicely integrates with Spring MVC. 
-#Cucumber - for BDD-style tests
+###Spring Framework
+###Spring Boot 
+###Spring Data
+###JPA - with Hibernate as persistence provider and MySQL as database.
+###Ehcache 
+###Thymeleaf - pretty cool view technology which nicely integrates with Spring MVC. 
+###Cucumber - for BDD-style tests
 
 ##System requirements
 
