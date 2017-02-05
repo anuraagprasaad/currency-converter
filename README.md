@@ -28,3 +28,5 @@ After you register and log in you will be able to access Spring Actuator endpoin
 ## Running the application
 
 mvn spring-boot:run
+
+This should start the embedded Tomcat and the application will be available at http://localhost:8080/
