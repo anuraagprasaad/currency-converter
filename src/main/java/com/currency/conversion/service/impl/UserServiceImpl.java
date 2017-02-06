@@ -34,41 +34,30 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserHistoryRepository historyRepository;
-	
+
 	@Autowired
 	private Validator validator;
-	
-	/*@Autowired
-	private PasswordEncoder passwordEncoder;
-*/
+
 	public UserServiceImpl() {
-		
+
 	}
-	
+
 	public UserServiceImpl(Validator validator, UserRepository repository, UserHistoryRepository historyRepository) {
 		this.validator = validator;
 		this.repository = repository;
 		this.historyRepository = historyRepository;
 	}
-	
+
 	@Override
 	public User register(UserRegistrationForm form, Errors errors) throws UserExitstException {
 		logger.info("===register===");
-		/*Objects.requireNonNull(form);
-		Objects.requireNonNull(form.getUsername());
-		Objects.requireNonNull(form.getAddress());
-		Objects.requireNonNull(form.getStreet());
-		Objects.requireNonNull(form.getZip());
-		Objects.requireNonNull(form.getCity());
-		Objects.requireNonNull(form.getCountry());
-		Objects.requireNonNull(form.getPassword());*/
-		
+
 		// Validate the data transfer object
 		validator.validate(form, errors);
-		
+
 		// Check if user exists
 		if (repository.findByEmail(form.getEmail()) != null) {
-			//errors.rejectValue("email", "username.exists", "User already exists");
+			errors.rejectValue("email", "username.exists", "User already exists");
 			throw new UserExitstException();
 		}
 
