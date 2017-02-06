@@ -27,24 +27,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.eraseCredentials(true).userDetailsService(this.userService);
-	}
-		
-	/*@Autowired
-	void configureAuthenticationManager(AuthenticationManagerBuilder builder) throws Exception {
-		builder.authenticationProvider(daoAuthenticationProvider());
-	}
-*/
-	/*@Bean
-	AuthenticationProvider daoAuthenticationProvider() {
-		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-		provider.setPasswordEncoder(passwordEncoder());
-		provider.setUserDetailsService(userService);
-		return provider;
-	}
-
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-*/
+	}	
 }
