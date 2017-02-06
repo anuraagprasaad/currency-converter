@@ -43,9 +43,26 @@ Continous integration with Travis-CI. Build indicator status is displayed at the
 
 ## Running the application
 
+1)
+
 mvn spring-boot:run
 
 This should start the embedded Tomcat and the application will be available at http://localhost:8080/
+
+#Or
+
+2)
+
+a) Clone or download the project to some directory.
+
+b) Run the below commands in sequence:  
+
+     mvn clean install
+
+    java -jar target\cc-0.0.1-SNAPSHOT.jar
+
+    This should start the embedded Tomcat and the application will be available at http://localhost:8080/
+
 
 ## Running the tests
 
