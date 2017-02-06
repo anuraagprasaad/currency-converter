@@ -38,6 +38,10 @@ application.properties contains various settings for MySQL and OpenExchangeRates
 
 After you register and log in you will be able to access Spring Actuator endpoints, e.g. http://localhost:8080/dump for thread dump, health indicators and much more.
 
+## Continous Integraion
+
+Continous integration with Travis-CI. Build status is displayed at the top.
+
 ## Running the application
 
 mvn spring-boot:run
