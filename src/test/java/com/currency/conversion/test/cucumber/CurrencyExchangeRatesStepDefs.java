@@ -11,12 +11,21 @@ import static org.mockito.Mockito.when;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.sql.DataSource;
+
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.SpringApplicationContextLoader;
+import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.currency.conversion.Application;
 import com.currency.conversion.service.CurrencyService;
 import com.currency.conversion.service.OpenExchangeRateService;
 import com.currency.conversion.service.UserService;
@@ -27,8 +36,11 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-@ContextConfiguration(classes = TestConfig.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestConfig.class,Application.class, UserService.class,CurrencyService.class,OpenExchangeRateService.class}, loader = SpringApplicationContextLoader.class)
 @TestPropertySource(locations = "classpath:test.properties")
+@WebIntegrationTest("server.port:0")
+//@WebAppConfiguration
 public class CurrencyExchangeRatesStepDefs {
 
 	@Autowired
@@ -39,6 +51,11 @@ public class CurrencyExchangeRatesStepDefs {
 
 	@Autowired
 	private OpenExchangeRateService openExchangeRateService;
+	
+	@Autowired
+	private DataSource ds;
+	@Value("${local.server.port}")
+	private int port;
 
 	private String from;
 
