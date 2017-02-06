@@ -17,7 +17,7 @@ Spring Security
 
 Spring Data
 
-JPA - with Hibernate as persistence provider and MySQL as database.
+JPA - with Hibernate as persistence provider and MySQL (From Free MySQL Hosting) as database.
 
 Ehcache 
 
@@ -45,11 +45,15 @@ Continous integration with Travis-CI. Build indicator status is displayed at the
 
 1)
 
-mvn spring-boot:run
+a) Clone or download the project to some directory.
 
-This should start the embedded Tomcat and the application will be available at http://localhost:8080/
+b) Run the below command from that directory
 
-#Or
+     mvn spring-boot:run
+
+     This should start the embedded Tomcat and the application will be available at http://localhost:8080/
+
+##Or
 
 2)
 
