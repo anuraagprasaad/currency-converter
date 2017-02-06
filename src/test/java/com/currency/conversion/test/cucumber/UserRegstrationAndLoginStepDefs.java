@@ -132,7 +132,6 @@ public class UserRegstrationAndLoginStepDefs {
 	
 	@Then("^I should be logged in$")
 	public void i_should_be_logged_in() throws Throwable {
-		//assertThat(loggedIn, notNullValue());
 		assertThat(exception, nullValue());
 	}
 
