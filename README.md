@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/toedter/chatty.svg?branch=master)](https://travis-ci.org/toedter/chatty)
 
-
 # currency-converter
 Currency converter application using a public currency converter API 
 
@@ -40,7 +39,7 @@ After you register and log in you will be able to access Spring Actuator endpoin
 
 ## Continous Integraion
 
-Continous integration with Travis-CI. Build status is displayed at the top.
+Continous integration with Travis-CI. Build indicator status is displayed at the top.
 
 ## Running the application
 
